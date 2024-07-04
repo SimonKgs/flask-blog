@@ -3,7 +3,6 @@ from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
 from flask_login import login_user, LoginManager, current_user, logout_user, login_required
-from dotenv import load_dotenv
 import os
 
 from functools import wraps
@@ -13,12 +12,11 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 
 from database import db, BlogPost, User, Comment
 
-load_dotenv()
 
 app = Flask(__name__)
 
-app.secret_key = os.getenv('APP_SECRET_KEY')
-app.config['SECRET_KEY'] = os.getenv('APP_CONFIG_SECRET_KEY')
+app.secret_key = os.environ.get('APP_SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('APP_CONFIG_SECRET_KEY')
 
 # initializing ckeditor and bootstrap
 ckeditor = CKEditor(app)
